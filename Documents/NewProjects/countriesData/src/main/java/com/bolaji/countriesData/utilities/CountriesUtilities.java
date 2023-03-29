@@ -1,8 +1,6 @@
 package com.bolaji.countriesData.utilities;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.naming.Context;
@@ -22,13 +20,13 @@ public class CountriesUtilities {
     public static Connection getConnection() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         Connection conn = null;
         String host = "";
-        String hostUAT = "";
+        
         String passwords = "";
         String Instance = "";
         String usernames = "";
         //////// temp//////
         host = "";
-        hostUAT = "10.8.184.142";
+       // hostUAT = "10.8.184.142";
         usernames = "rtuser";
         passwords = "rtuatdb123$";
         Instance = "rtdb1pdb";

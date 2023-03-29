@@ -1,44 +1,16 @@
-package com.portfolio.bolaji.exceptions;
+package com.bolaji.countriesData.exceptions;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final String BAD_REQUEST = "BAD_REQUEST";
-    private static final String ERROR = "ERROR";
-    private static final String API_PROCESSING_ERROR = null;
-    private static final String INVALID_REQUEST  ="INVALID_REQUEST" ;
-    private static final String SERVICE_UNAVAILABLE  = "SERVICE_UNAVAILABLE";
-    private static final String RECORD_NOT_FOUND = "RECORD_NOT_FOUND" ;
-    private static final String INVALID_HEADER_VALUES = "INVALID_HEADER_VALUES" ;
-    private final ResponseUtils responseUtils;
+   // private final ResponseUtils responseUtils;
 
 
     // @Override
