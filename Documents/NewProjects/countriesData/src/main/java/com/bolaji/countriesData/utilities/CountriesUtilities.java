@@ -66,28 +66,28 @@ public class CountriesUtilities {
 
     }
 
-    @Override
-    public  void closeConnection(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.setAutoCommit(true);
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    // @Override
+    // public  void closeConnection(Connection connection) {
+    //     if (connection != null) {
+    //         try {
+    //             connection.setAutoCommit(true);
+    //             connection.close();
+    //         } catch (Exception e) {
+    //             e.printStackTrace();
+    //         }
+    //     }
 
-    }
+    // }
 
-    @Override
-    public void closeCallableStatement(CallableStatement callableStatement) {
-        if (callableStatement != null) {
-            try {
-                callableStatement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+    // @Override
+    // public void closeCallableStatement(CallableStatement callableStatement) {
+    //     if (callableStatement != null) {
+    //         try {
+    //             callableStatement.close();
+    //         } catch (Exception e) {
+    //             e.printStackTrace();
+    //         }
+    //     }
+    // }
 
 }

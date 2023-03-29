@@ -25,7 +25,7 @@ public class CountriesRepoImpl  implements CountriesRepo {
         CallableStatement callableStatement = null;
         ResultSet resultSet = null;
         CountriesModel countriesModel = null;
-        ResponseUtils response = new ResponseUtils();
+        //ResponseUtils response = new ResponseUtils();
         List<CountriesModel> details = new ArrayList<>();
 
         
@@ -33,7 +33,7 @@ public class CountriesRepoImpl  implements CountriesRepo {
 
 
         try {
-            connection = dbConnection.connectRTDB();
+          //  connection = dbConnection.connectRTDB();
             String query = "{call " + dataBasePackage + ".get_transactions_by_queue_state(" +
                     "?," + // 1
                     "?," + // 2
@@ -56,12 +56,12 @@ public class CountriesRepoImpl  implements CountriesRepo {
 
             if (response.getResponseCode().equals("000") && response.getResponseMessage().equals("Successful")) {
                 while (resultSet.next()) {
-                    transactionStatusDetails = new TransactionStatusDetails();
-                    transactionStatusDetails.setTransactionReference(resultSet.getString("TRAN_REFERENCE"));
-                    transactionStatusDetails.setStatus(resultSet.getString("QUEUE_STATE"));
-                    transactionStatusDetails.setCallBackUrl(resultSet.getString("CALLBACK_URL"));
-                    transactionStatusDetails.setTransactingPartner(resultSet.getString("TRANSACTION_PARTNER"));
-                    details.add(transactionStatusDetails);
+                    countriesModel = new CountriesModel();
+                    // transactionStatusDetails.setTransactionReference(resultSet.getString("TRAN_REFERENCE"));
+                    // transactionStatusDetails.setStatus(resultSet.getString("QUEUE_STATE"));
+                    // transactionStatusDetails.setCallBackUrl(resultSet.getString("CALLBACK_URL"));
+                    // transactionStatusDetails.setTransactingPartner(resultSet.getString("TRANSACTION_PARTNER"));
+                    // details.add(transactionStatusDetails);
                 }
 
             }
@@ -74,7 +74,7 @@ public class CountriesRepoImpl  implements CountriesRepo {
             response.setResponseCode("99");
             response.setResponseMessage("An error occurred while fetching transaction status");
         } finally {
-            dbConnection.closeConnection(connection, callableStatement, resultSet);
+          //  dbConnection.closeConnection(connection, callableStatement, resultSet);
         }
         return response;
 
