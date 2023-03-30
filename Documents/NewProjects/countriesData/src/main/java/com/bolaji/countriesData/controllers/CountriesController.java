@@ -34,6 +34,22 @@ public class CountriesController {
         return repository.getAllCountries();
     }
 
+
+    @GetMapping
+    @ResponseBody
+    @RequestMapping(value = ("/convert"), method = { RequestMethod.POST }, produces = {
+        "application/json" }, consumes = { "application/json" })
+    public ResponseEntity<CountriesModel> getCountriesByGDP(){
+        return repository.getAllCountries();
+    }
+
+    @GetMapping
+    @ResponseBody
+    @RequestMapping(value = ("/convert"), method = { RequestMethod.POST }, produces = {
+        "application/json" }, consumes = { "application/json" })
+    public ResponseEntity<CountriesModel> getCountriesInternetUser(){
+        return repository.getAllCountries();
+    }
    
 
 
