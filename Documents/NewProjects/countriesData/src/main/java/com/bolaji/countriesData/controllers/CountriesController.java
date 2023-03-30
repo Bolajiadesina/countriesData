@@ -3,12 +3,15 @@ package com.bolaji.countriesData.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bolaji.countriesData.models.CountriesModel;
+import com.bolaji.countriesData.models.CountryRequest;
 import com.bolaji.countriesData.repositories.CountriesRepo;
 
 
@@ -28,27 +31,28 @@ public class CountriesController {
 
     @GetMapping
     @ResponseBody
-    @RequestMapping(value = ("/convert"), method = { RequestMethod.POST }, produces = {
+    @RequestMapping(value = ("/getAllCountries"), method = { RequestMethod.POST }, produces = {
         "application/json" }, consumes = { "application/json" })
     public ResponseEntity<CountriesModel> getAllCountries(){
         return repository.getAllCountries();
     }
 
 
-    @GetMapping
+    @PostMapping
     @ResponseBody
-    @RequestMapping(value = ("/convert"), method = { RequestMethod.POST }, produces = {
+    @RequestMapping(value = ("/getCountriesByGDP"), method = { RequestMethod.POST }, produces = {
         "application/json" }, consumes = { "application/json" })
-    public ResponseEntity<CountriesModel> getCountriesByGDP(){
-        return repository.getAllCountries();
+    public ResponseEntity<CountriesModel> getCountriesByGDP(@RequestBody  CountryRequest   request ){
+        logger.info("request {}", request);
+        return repository.getCountriesByGDP(request);
     }
-
-    @GetMapping
+  
+    @PostMapping
     @ResponseBody
-    @RequestMapping(value = ("/convert"), method = { RequestMethod.POST }, produces = {
+    @RequestMapping(value = ("/getCountriesInternetUser"), method = { RequestMethod.POST }, produces = {
         "application/json" }, consumes = { "application/json" })
-    public ResponseEntity<CountriesModel> getCountriesInternetUser(){
-        return repository.getAllCountries();
+    public ResponseEntity<CountriesModel> getCountriesInternetUser(@RequestBody  CountryRequest   request ){
+        return repository.getCountriesInternetUser(request);
     }
    
 

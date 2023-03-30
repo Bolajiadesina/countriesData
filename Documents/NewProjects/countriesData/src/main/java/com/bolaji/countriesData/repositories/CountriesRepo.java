@@ -3,11 +3,12 @@ package com.bolaji.countriesData.repositories;
 import org.springframework.http.ResponseEntity;
 
 import com.bolaji.countriesData.models.CountriesModel;
+import com.bolaji.countriesData.models.CountryRequest;
 
 public interface CountriesRepo {
 
     public ResponseEntity<CountriesModel>  getAllCountries();
-    public CountriesModel getCountriesByGdpComposition( String gdpComposition);
-    public CountriesModel  getCountriesByNumOfInternetUser();
+    public ResponseEntity<CountriesModel> getCountriesByGDP(CountryRequest request);
+    public ResponseEntity<CountriesModel> getCountriesInternetUser(CountryRequest request);
     
 }
