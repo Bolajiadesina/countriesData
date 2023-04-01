@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.bolaji.countriesData.models.CountriesModel;
 import com.bolaji.countriesData.models.CountryRequest;
+import com.bolaji.countriesData.models.ResponseUtils;
 import com.bolaji.countriesData.utilities.CountriesUtilities;
 
 
@@ -38,6 +39,7 @@ public class CountriesRepoImpl  implements CountriesRepo {
         Connection connection = null;
         CallableStatement callableStatement = null;
         ResultSet resultSet = null;
+        ResponseUtils response= new ResponseUtils();
         CountriesModel countriesModel = null;
         //ResponseUtils response = new ResponseUtils();
         List<CountriesModel> details = new ArrayList<>();
@@ -48,7 +50,7 @@ public class CountriesRepoImpl  implements CountriesRepo {
 
         try {
            connection = CountriesUtilities.getConnection();
-            String query = "{call " + dataBasePackage + ".get_transactions_by_queue_state(" +
+            String query = "{call " + dataBasePackage + ".getAllCountries(" +
                     "?," + // 1
                     "?," + // 2
                     "?" + // 3
@@ -64,33 +66,37 @@ public class CountriesRepoImpl  implements CountriesRepo {
             logger.info("responseCode: {} ", callableStatement.getString(1));
             logger.info("responseMessage: {} ", callableStatement.getString(2));
 
-            // // response.setResponseCode(callableStatement.getString(1));
-            // // response.setResponseMessage(callableStatement.getString(2));
-            // resultSet = (ResultSet) callableStatement.getObject(3);
+            response.setResponseCode(callableStatement.getString(1));
+            response.setResponseMessage(callableStatement.getString(2));
+            resultSet = (ResultSet) callableStatement.getObject(3);
 
-            // if (response.getResponseCode().equals("000") && response.getResponseMessage().equals("Successful")) {
-            //     while (resultSet.next()) {
-            //         countriesModel = new CountriesModel();
-            //         // transactionStatusDetails.setTransactionReference(resultSet.getString("TRAN_REFERENCE"));
-            //         // transactionStatusDetails.setStatus(resultSet.getString("QUEUE_STATE"));
-            //         // transactionStatusDetails.setCallBackUrl(resultSet.getString("CALLBACK_URL"));
-            //         // transactionStatusDetails.setTransactingPartner(resultSet.getString("TRANSACTION_PARTNER"));
-            //         // details.add(transactionStatusDetails);
-            //     }
+            if (response.getResponseCode().equals("000") && response.getResponseMessage().equals("Successful")) {
+                while (resultSet.next()) {
+                    countriesModel = new CountriesModel();
 
-            // }
-          //  response.setData(details);
+                    countriesModel.setRank(resultSet.getInt("country_rank"));
+                    countriesModel.setCountry(resultSet.getString("country_name"));
+                    countriesModel.setContinent(resultSet.getString("coutinent"));
+                    countriesModel.setPopulation(resultSet.getDouble("population"));
+                    countriesModel.setDependency(resultSet.getString("dependency"));
+                    countriesModel.setSource(resultSet.getString("source"));
+                    countriesModel.setDate(resultSet.getDate("datw"));
+                    
+                }
+
+            }
+           response.setData(details);
           //  logger.info("response: {}", response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error(e.getMessage(), "error occurred while fetching transaction");
-            // response.setResponseCode("99");
-            // response.setResponseMessage("An error occurred while fetching transaction status");
+            logger.error(e.getMessage(), "error occurred while fetching record");
+            response.setResponseCode("99");
+           response.setResponseMessage("An error occurred while fetching transaction status");
         } finally {
-          //  dbConnection.closeConnection(connection, callableStatement, resultSet);
+          CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
         }
-        return null;
+        return response;
 
         
     }

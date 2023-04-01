@@ -1,7 +1,9 @@
 package com.bolaji.countriesData.utilities;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -45,6 +47,11 @@ public class CountriesUtilities {
 
     }
 
+    /**
+     * This method uses a jndi parameter to compose connection string instead of one off connection that may have to be opened everytime 
+     * a connection is required. it it deployed on the server  
+     * @return connection pool
+     */
     public Connection getDataBaseConnection() {
         // TODO Auto-generated method stub
 
@@ -67,28 +74,40 @@ public class CountriesUtilities {
 
     }
 
-    // @Override
-    // public  void closeConnection(Connection connection) {
-    //     if (connection != null) {
-    //         try {
-    //             connection.setAutoCommit(true);
-    //             connection.close();
-    //         } catch (Exception e) {
-    //             e.printStackTrace();
-    //         }
-    //     }
+    /**
+     * @param connection
+     * @param callableStatement
+     * @param resultSet
+     */
+    @Override
+    public  static  void closeConnection(Connection connection,CallableStatement callableStatement,ResultSet resultSet) {
+        if (connection != null) {
+            try {
+                connection.setAutoCommit(true);
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-    // }
+        if (callableStatement != null) {
+            try {
+                callableStatement.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-    // @Override
-    // public void closeCallableStatement(CallableStatement callableStatement) {
-    //     if (callableStatement != null) {
-    //         try {
-    //             callableStatement.close();
-    //         } catch (Exception e) {
-    //             e.printStackTrace();
-    //         }
-    //     }
-    // }
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+ 
 
 }
