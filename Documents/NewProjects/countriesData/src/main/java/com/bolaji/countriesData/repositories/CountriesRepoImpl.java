@@ -31,17 +31,20 @@ public class CountriesRepoImpl  implements CountriesRepo {
     private String dataBasePackage;
 
 
+    @Autowired
+    CountriesUtilities countriesUtilities;
+
+
 
 
     @Override
-    public ResponseEntity<CountriesModel> getAllCountries() {
+    public ResponseEntity<ResponseUtils> getAllCountries() {
         // TODO Auto-generated method stub
         Connection connection = null;
         CallableStatement callableStatement = null;
         ResultSet resultSet = null;
         ResponseUtils response= new ResponseUtils();
         CountriesModel countriesModel = null;
-        //ResponseUtils response = new ResponseUtils();
         List<CountriesModel> details = new ArrayList<>();
 
         
@@ -54,10 +57,12 @@ public class CountriesRepoImpl  implements CountriesRepo {
                     "?," + // 1
                     "?," + // 2
                     "?" + // 3
+                    "?" + // 4
                     ")}";
 
 
            callableStatement = connection.prepareCall(query);
+           
             callableStatement.registerOutParameter(1, Types.VARCHAR);
             callableStatement.registerOutParameter(2, Types.VARCHAR);
             callableStatement.registerOutParameter(3, Types.REF_CURSOR);
@@ -80,10 +85,12 @@ public class CountriesRepoImpl  implements CountriesRepo {
                     countriesModel.setPopulation(resultSet.getDouble("population"));
                     countriesModel.setDependency(resultSet.getString("dependency"));
                     countriesModel.setSource(resultSet.getString("source"));
-                    countriesModel.setDate(resultSet.getDate("datw"));
+                    countriesModel.setDate(resultSet.getDate("data"));
                     
-                }
 
+                    details.add(countriesModel);
+                }
+            
             }
            response.setData(details);
           //  logger.info("response: {}", response);
@@ -106,7 +113,75 @@ public class CountriesRepoImpl  implements CountriesRepo {
     @Override
     public ResponseEntity<CountriesModel> getCountriesByGDP(CountryRequest request) {
       // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Unimplemented method 'getCountriesByGDP'");
+      Connection connection = null;
+      CallableStatement callableStatement = null;
+      ResultSet resultSet = null;
+      ResponseUtils response= new ResponseUtils();
+      CountriesModel countriesModel = null;
+    
+
+      
+
+
+
+      try {
+         connection = CountriesUtilities.getConnection();
+          String query = "{call " + dataBasePackage + ".getCountriesByGDP(" +
+                  "?," + // 1
+                  "?," + // 2
+                  "?" + // 3
+                  ")}";
+                  
+
+         callableStatement = connection.prepareCall(query);
+         callableStatement.setString(1, request.getCountryCode()  ==null ?  "" : request.getCountryCode() );
+          callableStatement.registerOutParameter(2, Types.VARCHAR);
+          callableStatement.registerOutParameter(3, Types.VARCHAR);
+          callableStatement.registerOutParameter(4, Types.REF_CURSOR);
+          callableStatement.execute();
+
+          logger.info("responseCode: {} ", callableStatement.getString(1));
+          logger.info("responseMessage: {} ", callableStatement.getString(2));
+
+          response.setResponseCode(callableStatement.getString(1));
+          response.setResponseMessage(callableStatement.getString(2));
+          resultSet = (ResultSet) callableStatement.getObject(3);
+
+          if (response.getResponseCode().equals("000") && response.getResponseMessage().equals("Successful")) {
+              while (resultSet.next()) {
+                  countriesModel = new CountriesModel();
+
+                  countriesModel.setRank(resultSet.getInt("country_rank"));
+                  countriesModel.setCountry(resultSet.getString("country_name"));
+                  countriesModel.setContinent(resultSet.getString("coutinent"));
+                  countriesModel.setPopulation(resultSet.getDouble("population"));
+                  countriesModel.setDependency(resultSet.getString("dependency"));
+                  countriesModel.setSource(resultSet.getString("source"));
+                  countriesModel.setDate(resultSet.getDate("datw"));
+                  
+
+              
+              }
+          
+          }
+         response.setData(countriesModel);
+        //  logger.info("response: {}", response);
+
+      } catch (Exception e) {
+          e.printStackTrace();
+          logger.error(e.getMessage(), "error occurred while fetching record");
+          response.setResponseCode("99");
+         response.setResponseMessage("An error occurred while fetching transaction status");
+      } finally {
+        CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
+      }
+      return response;
+
+
+
+
+
+
     }
 
     @Override

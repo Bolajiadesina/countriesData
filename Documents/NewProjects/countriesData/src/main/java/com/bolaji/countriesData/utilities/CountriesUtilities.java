@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 
 
-
+@Service
 public class CountriesUtilities {
 
     /**

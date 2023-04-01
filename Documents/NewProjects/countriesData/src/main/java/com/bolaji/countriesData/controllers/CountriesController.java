@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bolaji.countriesData.models.CountriesModel;
 import com.bolaji.countriesData.models.CountryRequest;
+import com.bolaji.countriesData.models.ResponseUtils;
 import com.bolaji.countriesData.repositories.CountriesRepo;
 
 
@@ -33,7 +34,7 @@ public class CountriesController {
     @ResponseBody
     @RequestMapping(value = ("/getAllCountries"), method = { RequestMethod.POST }, produces = {
         "application/json" }, consumes = { "application/json" })
-    public ResponseEntity<CountriesModel> getAllCountries(){
+    public ResponseEntity<ResponseUtils> getAllCountries(){
         return repository.getAllCountries();
     }
 
