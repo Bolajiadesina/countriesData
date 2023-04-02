@@ -9,7 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-
+import org.springframework.stereotype.Service;
 
 @Service
 public class CountriesUtilities {
@@ -22,16 +22,17 @@ public class CountriesUtilities {
      * @throws InstantiationException
      */
 
-    public static Connection getConnection() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public static Connection getConnection()
+            throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         Connection conn = null;
         String host = "";
-        
+
         String passwords = "";
         String Instance = "";
         String usernames = "";
         //////// temp//////
         host = "";
-       // hostUAT = "10.8.184.142";
+        // hostUAT = "10.8.184.142";
         usernames = "rtuser";
         passwords = "rtuatdb123$";
         Instance = "rtdb1pdb";
@@ -48,8 +49,10 @@ public class CountriesUtilities {
     }
 
     /**
-     * This method uses a jndi parameter to compose connection string instead of one off connection that may have to be opened everytime 
-     * a connection is required. it it deployed on the server  
+     * This method uses a jndi parameter to compose connection string instead of one
+     * off connection that may have to be opened everytime
+     * a connection is required. it it deployed on the server
+     * 
      * @return connection pool
      */
     public Connection getDataBaseConnection() {
@@ -74,13 +77,9 @@ public class CountriesUtilities {
 
     }
 
-    /**
-     * @param connection
-     * @param callableStatement
-     * @param resultSet
-     */
-    @Override
-    public  static  void closeConnection(Connection connection,CallableStatement callableStatement,ResultSet resultSet) {
+    public static void closeConnection(Connection connection, CallableStatement callableStatement,
+            ResultSet resultSet) {
+
         if (connection != null) {
             try {
                 connection.setAutoCommit(true);
@@ -107,7 +106,4 @@ public class CountriesUtilities {
         }
 
     }
-
- 
-
 }

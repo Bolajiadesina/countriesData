@@ -43,7 +43,7 @@ public class CountriesController {
     @ResponseBody
     @RequestMapping(value = ("/getCountriesByGDP"), method = { RequestMethod.POST }, produces = {
         "application/json" }, consumes = { "application/json" })
-    public ResponseEntity<CountriesModel> getCountriesByGDP(@RequestBody  CountryRequest   request ){
+    public ResponseEntity<ResponseUtils> getCountriesByGDP(@RequestBody  CountryRequest   request ){
         logger.info("request {}", request);
         return repository.getCountriesByGDP(request);
     }

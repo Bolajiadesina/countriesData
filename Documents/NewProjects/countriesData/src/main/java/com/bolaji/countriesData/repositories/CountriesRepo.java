@@ -13,7 +13,7 @@ import com.bolaji.countriesData.models.ResponseUtils;
 public interface CountriesRepo {
 
     public ResponseEntity<ResponseUtils>  getAllCountries();
-    public ResponseEntity<CountriesModel> getCountriesByGDP(CountryRequest request);
+    public ResponseEntity<ResponseUtils> getCountriesByGDP(CountryRequest request);
     public ResponseEntity<CountriesModel> getCountriesInternetUser(CountryRequest request);
     
 }
