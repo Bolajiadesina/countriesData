@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bolaji.countriesData.models.CountriesModel;
+
 import com.bolaji.countriesData.models.CountryRequest;
 import com.bolaji.countriesData.models.ResponseUtils;
 import com.bolaji.countriesData.repositories.CountriesRepo;
@@ -52,7 +52,7 @@ public class CountriesController {
     @ResponseBody
     @RequestMapping(value = ("/getCountriesInternetUser"), method = { RequestMethod.POST }, produces = {
         "application/json" }, consumes = { "application/json" })
-    public ResponseEntity<CountriesModel> getCountriesInternetUser(@RequestBody  CountryRequest   request ){
+    public ResponseEntity<ResponseUtils> getCountriesInternetUser(@RequestBody  CountryRequest   request ){
         return repository.getCountriesInternetUser(request);
     }
    
