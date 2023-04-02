@@ -15,6 +15,8 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.bolaji.countriesData.models.CountriesByInternetUsers;
 import com.bolaji.countriesData.models.CountriesModel;
 import com.bolaji.countriesData.models.CountryGDPModel;
 import com.bolaji.countriesData.models.CountryRequest;
@@ -168,9 +170,68 @@ public class CountriesRepoImpl implements CountriesRepo {
   }
 
   @Override
-  public ResponseEntity<CountriesModel> getCountriesInternetUser(CountryRequest request) {
+  public ResponseEntity<ResponseUtils> getCountriesInternetUser(CountryRequest request) {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getCountriesInternetUser'");
+    Connection connection = null;
+    CallableStatement callableStatement = null;
+    ResultSet resultSet = null;
+    ResponseUtils response = new ResponseUtils();
+    CountriesByInternetUsers countriesByInternetUsers = null;
+
+    try {
+      connection = CountriesUtilities.getConnection();
+      String query = "{call " + dataBasePackage + ".getCountriesByGDP(" +
+          "?," + // 1
+          "?," + // 2
+          "?" + // 3
+          ")}";
+
+      callableStatement = connection.prepareCall(query);
+      callableStatement.setString(1, request.getCountryCode() == null ? "" : request.getCountryCode());
+      callableStatement.registerOutParameter(2, Types.VARCHAR);
+      callableStatement.registerOutParameter(3, Types.VARCHAR);
+      callableStatement.registerOutParameter(4, Types.REF_CURSOR);
+      callableStatement.execute();
+
+      logger.info("responseCode: {} ", callableStatement.getString(1));
+      logger.info("responseMessage: {} ", callableStatement.getString(2));
+
+      response.setResponseCode(callableStatement.getString(1));
+      response.setResponseMessage(callableStatement.getString(2));
+      resultSet = (ResultSet) callableStatement.getObject(3);
+
+      if (response.getResponseCode().equals("000") && response.getResponseMessage().equals("Successful")) {
+        while (resultSet.next()) {
+          countriesByInternetUsers = new CountriesByInternetUsers();
+
+          countriesByInternetUsers.setCountryArea(resultSet.getString("countryarea"));
+          countriesByInternetUsers.setInternetUsers(resultSet.getString("internetuser"));
+          countriesByInternetUsers.setPercentage(resultSet.getString("percentage"));
+          countriesByInternetUsers.setPopulation(resultSet.getString("population"));
+          countriesByInternetUsers.setRank(resultSet.getString("rank"));
+
+        }
+
+      }else{
+        CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
+        response.setResponseCode(ResponseEnum.SERVICE_UNAVAILABLE.getCode());
+        response.setResponseMessage(ResponseEnum.SERVICE_UNAVAILABLE.getMessage());
+        return  ResponseEntity.ofNullable(response);
+      }
+      response.setData(countriesByInternetUsers);
+      // logger.info("response: {}", response);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      logger.error(e.getMessage(), "error occurred while fetching record");
+      response.setResponseCode("99");
+      response.setResponseCode(ResponseEnum.SERVICE_UNAVAILABLE.getCode());
+      response.setResponseMessage(ResponseEnum.SERVICE_UNAVAILABLE.getMessage());
+    } finally {
+      CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
+    }
+    return  ResponseEntity.ok(response);
+
   }
 
 }

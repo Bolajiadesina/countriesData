@@ -14,6 +14,6 @@ public interface CountriesRepo {
 
     public ResponseEntity<ResponseUtils>  getAllCountries();
     public ResponseEntity<ResponseUtils> getCountriesByGDP(CountryRequest request);
-    public ResponseEntity<CountriesModel> getCountriesInternetUser(CountryRequest request);
+    public ResponseEntity<ResponseUtils> getCountriesInternetUser(CountryRequest request);
     
 }
