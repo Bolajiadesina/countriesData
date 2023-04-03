@@ -56,6 +56,4 @@ public class CountriesController {
         return repository.getCountriesInternetUser(request);
     }
    
-
-
 }
