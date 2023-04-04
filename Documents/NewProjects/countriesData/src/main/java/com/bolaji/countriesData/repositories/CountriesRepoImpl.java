@@ -3,6 +3,7 @@ package com.bolaji.countriesData.repositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.sql.CallableStatement;
@@ -23,8 +24,6 @@ import com.bolaji.countriesData.models.CountryRequest;
 import com.bolaji.countriesData.models.ResponseEnum;
 import com.bolaji.countriesData.models.ResponseUtils;
 import com.bolaji.countriesData.utilities.CountriesUtilities;
-
-@Service
 
 public class CountriesRepoImpl implements CountriesRepo {
   private static Logger logger = LoggerFactory.getLogger(CountriesRepoImpl.class);
@@ -95,7 +94,7 @@ public class CountriesRepoImpl implements CountriesRepo {
     } finally {
       CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
     }
-    return  ResponseEntity.ok(response) ;
+    return ResponseEntity.ok(response);
 
   }
 
@@ -147,11 +146,11 @@ public class CountriesRepoImpl implements CountriesRepo {
 
         }
 
-      }else{
+      } else {
         CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
         response.setResponseCode(ResponseEnum.SERVICE_UNAVAILABLE.getCode());
         response.setResponseMessage(ResponseEnum.SERVICE_UNAVAILABLE.getMessage());
-        return  ResponseEntity.ofNullable(response);
+        return ResponseEntity.ofNullable(response);
       }
       response.setData(countryGDPModel);
       // logger.info("response: {}", response);
@@ -165,7 +164,7 @@ public class CountriesRepoImpl implements CountriesRepo {
     } finally {
       CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
     }
-    return  ResponseEntity.ok(response);
+    return ResponseEntity.ok(response);
 
   }
 
@@ -212,11 +211,11 @@ public class CountriesRepoImpl implements CountriesRepo {
 
         }
 
-      }else{
+      } else {
         CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
         response.setResponseCode(ResponseEnum.SERVICE_UNAVAILABLE.getCode());
         response.setResponseMessage(ResponseEnum.SERVICE_UNAVAILABLE.getMessage());
-        return  ResponseEntity.ofNullable(response);
+        return ResponseEntity.ofNullable(response);
       }
       response.setData(countriesByInternetUsers);
       // logger.info("response: {}", response);
@@ -230,7 +229,7 @@ public class CountriesRepoImpl implements CountriesRepo {
     } finally {
       CountriesUtilities.closeConnection(connection, callableStatement, resultSet);
     }
-    return  ResponseEntity.ok(response);
+    return ResponseEntity.ok(response);
 
   }
 
