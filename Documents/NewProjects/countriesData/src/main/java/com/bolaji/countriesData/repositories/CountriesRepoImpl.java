@@ -25,6 +25,9 @@ import com.bolaji.countriesData.models.ResponseEnum;
 import com.bolaji.countriesData.models.ResponseUtils;
 import com.bolaji.countriesData.utilities.CountriesUtilities;
 
+
+
+@Repository
 public class CountriesRepoImpl implements CountriesRepo {
   private static Logger logger = LoggerFactory.getLogger(CountriesRepoImpl.class);
 
