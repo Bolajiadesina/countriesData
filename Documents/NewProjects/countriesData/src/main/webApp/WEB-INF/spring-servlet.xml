@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans ...>
+ 
+    <context:component-scan base-package="com.bolaji.countriesData.controller"/>
+ 
+    <mvc:annotation-driven/>
+ 
+    <mvc:resources location="/resources/" mapping="/resources/**"/>
+ 
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="resources/templates"/>
+        <property name="suffix" value=".html"/>
+    </bean>
+ 
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
+</beans>
