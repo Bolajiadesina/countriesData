@@ -14,7 +14,7 @@ public class DemoController {
       return "bolajiPortfolio";
      }
 
-       @GetMapping(value ="/myportfolio")
+       @GetMapping(value ="/mybolajiportfolio")
      public ModelAndView bolajiPortfolio() {  
 
         ModelAndView md= new ModelAndView();
