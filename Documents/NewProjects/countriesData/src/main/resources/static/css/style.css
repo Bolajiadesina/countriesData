@@ -48,3 +48,10 @@ h2 {
   background-color: #ddd;
   color: black;
 }
+
+.bg-img{
+  background: url([[@{/images/bkgd.jpg}]])
+                no-repeat center center fixed;
+  padding: 14px 16px;
+  background-color: darkslategray;
+}
