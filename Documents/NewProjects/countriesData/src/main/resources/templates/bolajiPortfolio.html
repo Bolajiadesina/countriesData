@@ -3,8 +3,9 @@
 
 <head>
    <meta charset="UTF-8">
-   
-      <div class="bg-img"><div class="container">
+   <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+   <div class="bg-img">
+      <div class="container">
          <div class="topnav">
             <a href="#portfolio">Portfolio</a>
             <a href="#learning">Learning</a>
@@ -12,20 +13,20 @@
             <a href="#about">About</a>
          </div>
       </div>
-     
-      
+
+
    </div>
-   
+
 
 
 
 </head>
 
 <body>
-  
 
-      <h2>Enums in Thymeleaf</h2>
-   <h2>Hello from 'templates/templates-2'</h2>
+
+   <h2>Contact Me</h2>
+   <h2>Send a message</h2>
    <div class="portfolio" title="Details">
 
       <form action="/action_page.php" method="get">
@@ -33,7 +34,12 @@
          <input type="text" id="fname" name="fname"><br><br>
          <label for="lname">Last name:</label>
          <input type="text" id="lname" name="lname"><br><br>
+         <label for="msg">Message</label>
+         <input type="text" id="#dialog" name="dialog"><br><br>
+
+
          <input type="submit" value="Submit">
+        
 
          <button type="button" th:onclick="doStuffMethod()"> Hello</button>
       </form>
@@ -48,8 +54,8 @@
       </form>
    </div>
    </div>
-   
-   
+
+
 
 
 
