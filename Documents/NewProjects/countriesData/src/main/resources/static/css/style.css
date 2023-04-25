@@ -40,19 +40,19 @@ h2 {
   color: white;
 }
 
-.bg-img{
-  background-image: url("src/main/static/images/bkgd.jpg")
-                no-repeat center center fixed;
+.bg-img {
+  background-image: url("../static/images/railway.jpg");
   padding: 14px 16px;
   background-color: darkslategray;
-   /* Center and scale the image nicely */
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
-   min-height: 380px;
-   /* Needed to position the navbar */
-   position: relative;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 380px;
+  /* Needed to position the navbar */
+  position: relative;
 }
+
 
 #dialog {
   display: none;
