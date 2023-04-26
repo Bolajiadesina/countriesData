@@ -11,16 +11,16 @@ h2 {
 /* Position the navbar container inside the image */
 .container {
   position: absolute;
-  margin: 20px;
+  margin: 10px;
   width: auto;
-  border-radius: 50px;
+  border-radius: 5px;
 }
 
 /* The navbar */
 .topnav {
   overflow: hidden;
   background-color: #333;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 /* Navbar links */
@@ -41,16 +41,17 @@ h2 {
 }
 
 .bg-img {
-  background-image: url("../static/images/railway.jpg");
+  background: url("../static/images/railway.jpg");
   padding: 14px 16px;
   background-color: darkslategray;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 380px;
+  min-height: 80px;
   /* Needed to position the navbar */
   position: relative;
+  border-radius: 10px;
 }
 
 
