@@ -19,7 +19,7 @@ h2 {
 /* The navbar */
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: #4469a8;
   border-radius: 5px;
 }
 
@@ -30,25 +30,25 @@ h2 {
 
   text-align: center;
   padding: 14px 16px;
-  text-decoration:rgb(7, 7, 8);
+  text-decoration:rgb(53, 53, 148);
   font-size: 17px;
   font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .topnav a:hover {
-  background-color:black;
+  background-color:rgb(37, 94, 123);
   color: white;
 }
 
 .bg-img {
   background: url("../static/images/railway.jpg");
   padding: 14px 16px;
-  background-color: darkslategray;
+  background-color: rgb(115, 137, 189);
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 80px;
+  min-height: 70px;
   /* Needed to position the navbar */
   position: relative;
   border-radius: 10px;
