@@ -1,73 +1,4 @@
-h2 {
-    color: rgb(0, 128, 255);
- }
 
- .portfolio{
-    color: chartreuse;
-    text-align: left;
- }
-
-
-/* Position the navbar container inside the image */
-.container {
-  position: absolute;
-  margin: 10px;
-  width: auto;
-  border-radius: 5px;
-}
-
-/* The navbar */
-.topnav {
-  overflow: hidden;
-  background-color: #4469a8;
-  border-radius: 5px;
-}
-
-/* Navbar links */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration:rgb(53, 53, 148);
-  font-size: 17px;
-  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.topnav a:hover {
-  background-color:rgb(37, 94, 123);
-  color: white;
-}
-
-.bg-img {
-  background: url("../static/images/railway.jpg");
-  padding: 14px 16px;
-  background-color: rgb(115, 137, 189);
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 70px;
-  /* Needed to position the navbar */
-  position: relative;
-  border-radius: 10px;
-}
-
-
-/*!
-=========================================================
-* JohnDoe Landing page
-=========================================================
-
-* Copyright: 2019 DevCRUD (https://devcrud.com)
-* Licensed: (https://devcrud.com/licenses)
-* Coded by www.devcrud.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap");
 :root {
   --blue: #79A9F5;
@@ -11562,8 +11493,8 @@ pre .code {
   position: relative;
   height: 80vh;
   min-height: 600px;
-  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/header.jpg);
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/header.jpg);
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/header.jpg);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/header.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
